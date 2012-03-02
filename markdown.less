@@ -5,7 +5,7 @@
 
 @md-colors-foreground     : #444;
 @md-colors-headers        : #111;
-@md-colors-quotes         : #111;
+@md-colors-quotes         : #666;
 
 @md-colors-link           : #0645ad;
 @md-colors-link-visited   : #0b0080;
@@ -13,8 +13,11 @@
 @md-colors-link-active    : #faa700;
 
 @md-colors-selection      : rgba(255,255,0,0.3);
-@md-colors-selection-text : rgba(255,255,0,0.3);
+@md-colors-selection-text : @md-colors-foreground;
 
+@md-font-headers          : 'Droid Serif', Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+@md-font-body             : 'Droid Serif', Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
+@md-font-monospace        : 'Monaco', 'Ubuntu Mono', 'Lucida Console', 'Courier New', Courier, monospace;
 
 // ------------------------------------------------------------------------------
 //   @group Pagewide Styles
@@ -28,11 +31,12 @@ html {
 }
 
 body {
-	font-family:Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif;
 	color:@md-colors-foreground;
 	background:@md-colors-background;
 
+	font-family: @md-font-body;
 	font-size:12px;
+
 	line-height:1.5em;
 	padding:1em;
 	margin:auto;
@@ -56,14 +60,14 @@ a {
 	}
 
 	&::-moz-selection, &::selection {
-		background:@md-colors-selection;
-		color:@md-colors-link;
+		background: @md-colors-selection;
+		color: @md-colors-link;
 	}
 }
 
 ::-moz-selection, ::selection {
-	background:@md-colors-selection;
-	color:@md-colors-selection-text;
+	background: @md-colors-selection;
+	color: @md-colors-selection-text;
 }
 
 // ------------------------------------------------------------------------------
@@ -74,83 +78,78 @@ p {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-weight:normal;
-	color:@md-colors-headers;
-	line-height:1em;
+	font-family: @md-font-headers;
+	color: @md-colors-headers;
+	font-weight: normal;
+	line-height: 1em;
 }
 
 h4, h5, h6 {
 	font-weight: bold;
 }
 
-h1 { font-size:2.5em; }
-h2 { font-size:2em;   }
-h3 { font-size:1.5em; }
-h4 { font-size:1.2em; }
-h5 { font-size:1em;   }
-h6 { font-size:0.9em; }
+h1 { font-size: 2.5em; }
+h2 { font-size: 2em;   }
+h3 { font-size: 1.5em; }
+h4 { font-size: 1.2em; }
+h5 { font-size: 1em;   }
+h6 { font-size: 0.9em; }
 
 // ------------------------------------------------------------------------------
 //   @group General Typography
 // ------------------------------------------------------------------------------
 blockquote {
-	color:@md-colors-quotes;
+	color: @md-colors-quotes;
+	margin: 0;
 	padding-left: 3em;
-	border-left: 0.5em mix(@md-colors-quotes, @md-colors-background, 0.9) solid;
-	margin:0;
+	border-left: 0.5em mix(@md-colors-quotes, @md-colors-background, 25%) solid;
 }
 
 hr {
 	display: block;
 	height: 2px;
 	border: 0;
-	border-top: 1px solid #aaa;
-	border-bottom: 1px solid #eee;
+	border-top: 1px solid lighten(@md-colors-foreground, 60%);
+	border-bottom: 1px solid darken(@md-colors-background, 10%);
 	margin: 1em 0;
 	padding: 0;
 }
 
 pre, code, kbd, samp {
-	color: #000;
-	font-family: monospace, monospace;
-	_font-family: 'courier new', monospace;
+	font-family: @md-font-monospace;
+	color: mix(@md-colors-foreground, @md-colors-headers, 50%);
 	font-size: 0.98em;
 }
 
 pre {
 	white-space: pre;
 	white-space: pre-wrap;
-	word-wrap: break-word;
+	word-wrap:   break-word;
 }
 
-b, strong {
-	font-weight: bold;
-}
-
-dfn {
-	font-style: italic;
-}
+b, strong     { font-weight: bold; }
+dfn, mark, em { font-style: italic; }
 
 ins {
-	background: #ff9; color: #000; text-decoration: none;
+	background: #ff9; color: @md-colors-headers; text-decoration: none;
 }
 
 mark {
-	background: #ff0; color: #000; font-style: italic; font-weight: bold;
+	background: #ff0; color: @md-colors-headers; font-weight: bold;
 }
 
 sub, sup {
-	font-size: 75%; line-height: 0; position: relative; vertical-align: baseline;
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
 }
-sup {
-	top: -0.5em;
-}
-sub {
-	bottom: -0.25em;
-}
+sup { top: -0.5em;     }
+sub { bottom: -0.25em; }
 
 ul, ol {
-	margin: 1em 0; padding: 0 0 0 2em;
+	margin: 1em 0;
+	padding: 0 0 0 2em;
 }
 li p:last-child {
 	margin:0
